@@ -31,3 +31,9 @@ def end_game(game_state):
         print(f"🎉 MENANG! Skor akhir: {game_state.score}")
     else:
         print(f"😢 Kalah. Skor akhir: {game_state.score}")
+
+def spawn_ball(game_state):
+    """Memunculkan bola baru jika jumlah bola di layar masih sedikit."""
+    if len(game_state.balls) == 0:
+        ball = Ball(x=0.7, y=game_state.ground)
+        game_state.balls.append(ball)
