@@ -147,3 +147,24 @@ def update_game(game_state):
         game_state.time_left = max(0, 60 - int(elapsed))
         if game_state.time_left <= 0:
             end_game(game_state)
+
+def _handle_score(game_state, ball, now):
+    """Helper function internal untuk memproses penambahan poin."""
+    points = 2
+    throw_x = 0
+    
+    if ball.throw_start_pos:
+        throw_x = ball.throw_start_pos['x']
+        if throw_x >= game_state.zone_divider:
+            points = 3
+    
+    game_state.score += points
+    game_state.last_score_time = now
+    
+    # Trigger efek visual
+    game_state.score_effect_active = True
+    game_state.score_effect_start_time = now
+    game_state.score_effect_points = points
+    game_state.score_effect_position = {'x': ball.x, 'y': ball.y}
+    
+    print(f"🏀 SCORE! +{points} poin! Total: {game_state.score}")
