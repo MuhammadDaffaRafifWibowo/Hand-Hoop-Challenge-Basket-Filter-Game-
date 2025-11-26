@@ -20,3 +20,14 @@ def start_game(game_state):
     
     spawn_ball(game_state)
     print(f"🎮 Game dimulai! Target: {game_state.target} poin dalam 60 detik")
+
+def end_game(game_state):
+    """Mengakhiri permainan dan menentukan kondisi menang/kalah."""
+    game_state.is_playing = False
+    game_state.show_game_over = True
+    game_state.win = game_state.score >= game_state.target
+    
+    if game_state.win:
+        print(f"🎉 MENANG! Skor akhir: {game_state.score}")
+    else:
+        print(f"😢 Kalah. Skor akhir: {game_state.score}")
