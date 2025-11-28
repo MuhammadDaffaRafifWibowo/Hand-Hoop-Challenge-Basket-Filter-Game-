@@ -38,7 +38,7 @@ def spawn_ball(game_state):
         ball = Ball(x=0.7, y=game_state.ground)
         game_state.balls.append(ball)
 
-def update_game(game_state):
+def update_game(game_state, sound_manager=None):
     """
     Loop utama logika game: Fisika, interaksi tangan, dan scoring.
     """
@@ -132,7 +132,7 @@ def update_game(game_state):
             if inside_ring and ball.thrown:
                 if not was_inside_ring:
                     if now - game_state.last_score_time > 0.3:
-                        _handle_score(game_state, ball, now)
+                        _handle_score(game_state, ball, now, sound_manager) 
                 ball.entered_from_top = True
             else:
                 ball.entered_from_top = False
@@ -146,9 +146,9 @@ def update_game(game_state):
         elapsed = time.time() - game_state.game_start_time
         game_state.time_left = max(0, 60 - int(elapsed))
         if game_state.time_left <= 0:
-            end_game(game_state)
+            end_game(game_state, sound_manager)
 
-def _handle_score(game_state, ball, now):
+def _handle_score(game_state, ball, now, sound_manager=None):
     """Helper function internal untuk memproses penambahan poin."""
     points = 2
     throw_x = 0
@@ -167,4 +167,19 @@ def _handle_score(game_state, ball, now):
     game_state.score_effect_points = points
     game_state.score_effect_position = {'x': ball.x, 'y': ball.y}
     
+    if sound_manager:
+        sound_manager.play('score')
+    
     print(f"🏀 SCORE! +{points} poin! Total: {game_state.score}")
+
+def end_game(game_state, sound_manager=None):
+    game_state.is_playing = False
+    game_state.show_game_over = True
+    game_state.win = game_state.score >= game_state.target
+    
+    # 🔊 Mainkan suara menang/kalah
+    if sound_manager:
+        if game_state.win:
+            sound_manager.play('win')
+        else:
+            sound_manager.play('lose')
