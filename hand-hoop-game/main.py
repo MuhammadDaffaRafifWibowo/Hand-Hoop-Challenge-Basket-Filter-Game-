@@ -5,6 +5,7 @@ import game_logic as logic
 from game_objects import GameState
 from utils import is_hand_closed
 from sound_manager import SoundManager
+import os
 
 def main():
     """ Fungsi utama untuk inisialisasi kamera, MediaPipe, dan menjalankan Game Loop. """
@@ -26,9 +27,12 @@ def main():
     sound_mgr = SoundManager()
     # Pastikan Ada file suara .wav di folder yang sama atau folder assets
     # path suara:
-    sound_mgr.load_sound('score', 'goalSound.wav') 
-    sound_mgr.load_sound('win', 'win.wav')
-    sound_mgr.load_sound('lose', 'lose.wav')
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    ASSET_DIR = os.path.join(BASE_DIR, "assets")
+
+    sound_mgr.load_sound('score', os.path.join(ASSET_DIR, 'goalSound.wav'))
+    sound_mgr.load_sound('win',   os.path.join(ASSET_DIR, 'win.wav'))
+    sound_mgr.load_sound('lose',  os.path.join(ASSET_DIR, 'lose.wav'))
     
     # 4. Inisialisasi Game State
     game_state = GameState()
@@ -69,6 +73,7 @@ def main():
                     game_state.is_closed_hand = is_hand_closed(hand_landmarks)
                     
                     # Gambar tangan
+                    # Bagian ini dicomment agar tidak menggambarkan landmark tangan
                     # viz.draw_hand_landmarks(frame, hand_landmarks, width, height, game_state.is_closed_hand)
             else:
                 game_state.middle_finger_tip = None
