@@ -1,12 +1,11 @@
 import time
-import random
 from game_objects import Ball
 from utils import calculate_distance
 
 def start_game(game_state):
     """Memulai sesi permainan baru dan mereset variabel."""
     game_state.score = 0
-    game_state.target = random.randint(5, 15)
+    game_state.target = 15
     game_state.time_left = 60
     game_state.is_playing = True
     game_state.balls = []
