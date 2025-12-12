@@ -1,11 +1,12 @@
 import time
+import random
 from game_objects import Ball
 from utils import calculate_distance
 
 def start_game(game_state):
     """Memulai sesi permainan baru dan mereset variabel."""
     game_state.score = 0
-    game_state.target = 15
+    game_state.target = random.randint(5, 15)
     game_state.time_left = 60
     game_state.is_playing = True
     game_state.balls = []
@@ -41,6 +42,7 @@ def spawn_ball(game_state):
 def update_game(game_state, sound_manager=None):
     """
     Loop utama logika game: Fisika, interaksi tangan, dan scoring.
+    Versi yang ditingkatkan untuk kemudahan lemparan.
     """
     now = time.time()
     
@@ -49,37 +51,51 @@ def update_game(game_state, sound_manager=None):
         spawn_ball(game_state)
         game_state.last_spawn_time = now
     
-    # 2. Hand Grab Mechanics (Mengambil bola)
+    # 2. Hand Grab Mechanics (Mengambil bola) - DIPERBESAR RADIUS
     if game_state.is_closed_hand and game_state.middle_finger_tip and not game_state.holding_ball:
         for ball in game_state.balls:
             if not ball.thrown and not ball.grabbed:
                 dist = calculate_distance(game_state.middle_finger_tip, {'x': ball.x, 'y': ball.y})
-                if dist < 0.1: # Radius pengambilan
+                if dist < 0.15: # Radius pengambilan DIPERBESAR dari 0.1 ke 0.15
                     game_state.holding_ball = ball
                     ball.grabbed = True
                     ball.on_ground = False
                     ball.throw_start_pos = {'x': ball.x, 'y': ball.y}
+                    ball.grab_time = now  # Simpan waktu grab
                     break
     
-    # 3. Throw Mechanics (Melempar bola)
+    # 3. Throw Mechanics (Melempar bola) - DITINGKATKAN
+    # Tambahkan delay 0.2 detik sebelum bola bisa dilepas (mencegah lepas tidak sengaja)
     if not game_state.is_closed_hand and game_state.holding_ball:
         ball = game_state.holding_ball
-        # Menghitung kecepatan lempar berdasarkan pergerakan terakhir
-        if ball.prev_x is not None:
-            ball.vx = (ball.x - ball.prev_x) * 3
-            ball.vy = (ball.y - ball.prev_y) * 3 - 0.03
         
-        ball.thrown = True
-        ball.grabbed = False
-        game_state.holding_ball = None
+        # Cek apakah sudah dipegang minimal 0.2 detik
+        hold_duration = now - ball.grab_time if hasattr(ball, 'grab_time') else 999
+        
+        if hold_duration > 0.2:  # Hanya lempar jika sudah dipegang cukup lama
+            # Menghitung kecepatan lempar berdasarkan pergerakan terakhir
+            if ball.prev_x is not None:
+                # Kecepatan lempar DITINGKATKAN untuk lebih responsif
+                ball.vx = (ball.x - ball.prev_x) * 4.5  # Ditingkatkan dari 3 ke 4.5
+                ball.vy = (ball.y - ball.prev_y) * 4.5 - 0.04  # Ditingkatkan dari 3 ke 4.5, boost awal dari -0.03 ke -0.04
+            
+            ball.thrown = True
+            ball.grabbed = False
+            game_state.holding_ball = None
     
-    # 4. Update Posisi Bola yang Dipegang
+    # 4. Update Posisi Bola yang Dipegang - SMOOTHING DITINGKATKAN
     if game_state.holding_ball and game_state.middle_finger_tip:
         ball = game_state.holding_ball
         ball.prev_x = ball.x
         ball.prev_y = ball.y
-        ball.x = game_state.middle_finger_tip['x']
-        ball.y = game_state.middle_finger_tip['y']
+        
+        # Smoothing untuk mencegah gerakan terlalu cepat/jittery
+        target_x = game_state.middle_finger_tip['x']
+        target_y = game_state.middle_finger_tip['y']
+        
+        # Interpolasi lebih halus (0.3 = 30% ke target, 70% posisi lama)
+        ball.x = ball.x * 0.3 + target_x * 0.7
+        ball.y = ball.y * 0.3 + target_y * 0.7
     
     # 5. Physics Update untuk semua bola
     balls_to_keep = []
@@ -96,9 +112,9 @@ def update_game(game_state, sound_manager=None):
                 ball.roll_direction *= -1
                 ball.vx *= -0.7
 
-        # B. Bola sedang dilempar (di udara)
+        # B. Bola sedang dilempar (di udara) - GRAVITY DISESUAIKAN
         if ball.thrown:
-            ball.vy += 0.002 # Gravity
+            ball.vy += 0.0018 # Gravity DIKURANGI dari 0.002 agar lemparan lebih smooth
             ball.x += ball.vx
             ball.y += ball.vy
             

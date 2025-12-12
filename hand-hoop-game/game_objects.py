@@ -38,7 +38,7 @@ class GameState:
     def __init__(self):
         # Skor dan Waktu
         self.score = 0
-        self.target = random.randint(10, 15)  # Target poin untuk menang
+        self.target = random.randint(5, 15)  # Target poin untuk menang
         self.time_left = 60
         
         # Status Permainan
