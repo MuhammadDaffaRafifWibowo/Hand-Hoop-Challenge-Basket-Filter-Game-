@@ -11,9 +11,9 @@ Multimedia Tugasbesar
 | 2  | Adin Adry Tjindarbumi        | 122140024  | AdinAdryTjindarbumi      |
 | 3  | Muhammad Daffa Rafif Wibowo  | 122140036  | MuhammadDaffaRafifWibowo |
 
-# 📝 Logbook Progres Mingguan Proyek Hand-Tracking Basketball Game
+# Deskripsi Filter Hand Hoop Challenge
 
-Hand Hoop Challenge adalah arcade game eksperimental yang mengubah webcam laptop Anda menjadi pengontrol permainan. Dibangun menggunakan Python, proyek ini mendemonstrasikan bagaimana Human-Computer Interaction (HCI) dapat diciptakan menggunakan teknologi Computer Vision sederhana namun efektif.
+Hand Hoop Challenge adalah arcade game filter eksperimental yang mengubah webcam laptop Anda menjadi pengontrol permainan. Dibangun menggunakan Python, proyek ini mendemonstrasikan bagaimana Human-Computer Interaction (HCI) dapat diciptakan menggunakan teknologi Computer Vision sederhana namun efektif.
 
 Pemain ditantang untuk mencetak skor sebanyak mungkin dalam 60 detik dengan cara "memegang" bola virtual di layar dan melemparkannya ke ring menggunakan gerakan tangan asli. Tidak ada keyboard, tidak ada mouse hanya gerakan tangan Anda.
 
@@ -30,6 +30,7 @@ Teknologi di Balik Layar:
 - Arsitektur: Modular Design (Separated Logic, Visuals, and Objects).
 
 ---
+# 📝 Logbook Progres Mingguan Proyek Hand-Tracking Basketball Filter
 
 ## 📅 Logbook Mingguan
 
