@@ -1,28 +1,46 @@
 # Hand-Hoop-Challenge-Basket-Filter-Game-
 Multimedia Tugasbesar
 
+**Link Video Demonstrasi Filter:** https://youtu.be/P9VcYket7Vw?si=7kMKWbSGfSa_ytpZ
+
 # 👥 Daftar Anggota Kelompok
 
-| No | Nama                         | NIM        |
-|----|------------------------------|------------|
-| 1  | M. Raihan Athalah Ilham      | 122140022  |
-| 2  | Adin Adry Tjindarbumi        | 122140024  |
-| 3  | Muhammad Daffa Rafif Wibowo  | 122140036  |
+| No | Nama                         | NIM        | ID Github                |
+|----|------------------------------|------------|--------------------------|
+| 1  | M. Raihan Athalah Ilham      | 122140022  | Hannntastix              | 
+| 2  | Adin Adry Tjindarbumi        | 122140024  | AdinAdryTjindarbumi      |
+| 3  | Muhammad Daffa Rafif Wibowo  | 122140036  | MuhammadDaffaRafifWibowo |
 
 # 📝 Logbook Progres Mingguan Proyek Hand-Tracking Basketball Game
+
+Hand Hoop Challenge adalah arcade game eksperimental yang mengubah webcam laptop Anda menjadi pengontrol permainan. Dibangun menggunakan Python, proyek ini mendemonstrasikan bagaimana Human-Computer Interaction (HCI) dapat diciptakan menggunakan teknologi Computer Vision sederhana namun efektif.
+
+Pemain ditantang untuk mencetak skor sebanyak mungkin dalam 60 detik dengan cara "memegang" bola virtual di layar dan melemparkannya ke ring menggunakan gerakan tangan asli. Tidak ada keyboard, tidak ada mouse hanya gerakan tangan Anda.
+
+Teknologi di Balik Layar:
+
+- Bahasa: Python 3.9+ maksimal Python 3.11
+
+- Computer Vision: OpenCV & MediaPipe Hands
+
+- Audio: Pygame Mixer
+
+- Konsep Teknis: Vector Math untuk fisika bola, Collision Detection, dan State Management.
+
+- Arsitektur: Modular Design (Separated Logic, Visuals, and Objects).
 
 ---
 
 ## 📅 Logbook Mingguan
 
-| Minggu | Tanggal | Deskripsi Pekerjaan |
-|--------|----------|----------------------|--------------|---------|------------------------------|
-| Minggu 1 | 06/11/2025 | Mendiskusikan mekanisme dan alur pengerjaan project ini |
-| Minggu 2 | 11/11/2025 | Menentukan mekanisme permainan dalam filternya soal peraturan dan cara bermainnya dan buat readme |
-| Minggu 3 | 14/11/2025 | Commit code fungsi Menambahkan fungsi pendukung game: suara, deteksi kepalan, dan perhitungan posisi tangan ke dalam repositori github |
-| Minggu 4 | 26/11/2025 | Commit melengkapi semua code fungsi-fungsi ke repositori github |
-| Minggu 5 | 29/11/2025 | Melakukan modifikasi terhadap kode dan merapihkan struktur kodenya |
-| Minggu 6 | 12/12/2025 | Melakukan finalisasi terhadap kode dan modifikasi kode readme serta mempersiapkan segala kebutuhan yang harus dikumpul |
+| Minggu | Tanggal    | Deskripsi Pengerjaan                                               |
+|--------|------------|--------------------------------------------------------------------|
+| 1      | 06/11/2025 | Mendiskusikan mekanisme dan alur pengerjaan project ini            |
+| 2      | 11/11/2025 | Menentukan mekanisme permainan dalam filternya                     |
+| 3      | 14/11/2025 | Commit code fungsi Menambahkan fungsi ke dalam repositori github   |
+| 4      | 26/11/2025 | Commit melengkapi semua code fungsi-fungsi ke repositori github    |
+| 5      | 29/11/2025 | Melakukan modifikasi terhadap kode dan merapihkan struktur kodenya |
+| 6      | 12/12/2025 | Melakukan finalisasi terhadap kode dan modifikasi kode readme      |
 
 
 # 🛠️ Persiapan & Instalasi
@@ -70,7 +88,7 @@ python main.py
 
 -Mulai Game: Tekan tombol SPASI
 -Ambil Bola: Arahkan tangan ke bola, lalu GENGGAM (kepalkan) tangan
--Lempar Bola: Ayunkan tangan ke arah ring, lalu BUKA kepalan tangan
+-Lempar Bola: Arahkan membuka tangan ke arah ring
 
 Skor:
 
